@@ -6,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Carla Machado</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="images/galaxia.png" type="image/x-icon">
+    <link rel="shortcut icon" href="haystack.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="page-container">
         <img id="backgroundImage" src="pexels-jplenio-1776268.jpg" alt="Background Image" class="background-image">
 
-        <a href="#" class="button-glow" onclick="mostrarProjetos()">
-            <span class="text-container">Meus projetos</span>
-        </a>
+      <div class="projetos-header">
+<a href="#" class="button-glow" onclick="mostrarProjetos()">
+  <span class="text-container">
+    Meus projetos
+    <i class="fas fa-angle-down dropdown-icon"></i>
+  </span>
+</a>
+
+
+</div>
+
 
         <div id="projetos-container" class="projetos-container" style="display: none;">
             <div class="projeto">
