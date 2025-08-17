@@ -1,0 +1,702 @@
+@font-face {
+    font-family: 'Granny';
+    src: url('fonts/GrannyRegular-ALYgg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root { 
+    --bg: #F6F8FC;
+    --primary: #1f2bd3;
+    --secondary: #477ee4;
+    --h2-color: #ece57b;
+    --text: white;
+    --cube-side: 2.75rem;
+    --cube-side-half: calc(var(--cube-side) / 2);
+    --border-radius: 2rem;
+    --btn-bg:#ffffff;
+    --glow-size: 0.5rem;
+    --linkedin: #0177b5;
+}
+
+/* Barra de rolagem */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #070255;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d8ca0a;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f0e330;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%; 
+    width: 100%;
+    font-family: 'Granny';
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1; 
+}
+
+/* Botão "Meus projetos" */
+.button-glow {
+    width: 30rem;
+    height: 15vh;
+    text-decoration: none;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 40rem;
+    transform: translateX(-50%);
+    z-index: 2;
+    border-radius: var(--border-radius);
+    transition: all 0.5s;
+    gap: 0.5rem;
+    font-family: 'Granny';
+    font-weight: bold;
+    font-size: 3rem;
+    box-shadow: 0 1px 4px black;
+    margin-left: -300px;
+    
+    /* Novo tratamento para o texto - elimina fuzzy */
+    position: relative;
+    color: #556B2F; /* Cor sólida de fallback */
+}
+
+/* Container para o gradiente (evita aplicar no texto diretamente) */
+.button-glow .text-container {
+    position: relative;
+    z-index: 3;
+    background: linear-gradient(
+        to right,
+        #6B8E23 0%,
+        #556B2F 50%,
+        #8B4513 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none; /* Remove sombras que causam blur */
+    padding: 0.5rem 1rem;
+}
+
+/* Camada de fundo */
+.button-glow:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(3px);
+    left: 0;
+    top: 0;
+    border-radius: var(--border-radius);
+    z-index: 1;
+}
+
+/* Efeito glow otimizado */
+.button-glow:before {
+    content: '';
+    position: absolute;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    background: linear-gradient(
+        to right,
+        rgba(107, 142, 35, 0.6),
+        rgba(139, 69, 19, 0.6)
+    );
+    top: -4px;
+    left: -4px;
+    z-index: 0;
+    border-radius: calc(var(--border-radius) + 4px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Container de projetos */
+.projetos-container {
+    display: flex;
+    flex-direction: row; /* Lado a lado */
+    flex-wrap: wrap;     /* Quebra em linha se precisar */
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+/* Cada projeto funciona como "botão + conteúdo abaixo" */
+.projeto {
+    flex: 0 0 220px; /* largura fixa no desktop */
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    background: #6a8e2371;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: #131a2c;
+    transition: all 0.3s ease;
+}
+
+.projeto:hover {
+    transform: translateY(-3px);
+    background-color: #8B4513;
+    color: white;
+}
+
+/* Nome do projeto como botão */
+.projeto-nome {
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Conteúdo agora fica logo abaixo do botão */
+.projeto-detalhes {
+    position: absolute;
+    top: 100%; /* logo abaixo do projeto */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.projeto:hover .projeto-detalhes {
+    display: flex;
+}
+
+/* Ajuste da imagem */
+.projeto-detalhes img {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-top: -110px;
+}
+
+.projeto-botao {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(
+        to right,
+        #6B8E23 0%,
+        #556B2F 50%,
+        #8B4513 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none; /* Remove sombras que causam blur */
+    color:#131a2c;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: -120px;
+    width: auto;
+    writing-mode: horizontal-tb;
+   font-size: 1.5rem;
+}
+
+.projeto-botao:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: #8B4513;
+}
+
+.projetos-container {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: nowrap; /* mantém ordem no desktop */
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 200px; /* deixa espaço para cabeçalho e botão */
+    padding: 0 2rem;
+}
+
+
+.projeto-detalhes-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+    height: 500px;
+    width: 500px;
+}
+
+.projeto:hover ~ .projeto-detalhes-overlay {
+    display: block;
+}
+
+
+/* Cabeçalho */
+/* Estilos do cabeçalho principal */
+.cabecalho {
+    position: absolute;
+    top: 20px;
+    left: 75%;
+    transform: translateX(-50%);
+    width: 350px;
+    min-width: 300px;
+    max-width: 600px;
+    min-height: 15vh;
+    padding: 15px 25px;
+    font-family: 'Granny';
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease-in-out;
+}
+
+.navigation__group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(107, 142, 35, 0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.header-text {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.cabecalho h1 {
+    font-size: 1.3rem;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(
+        to right,
+        #6B8E23 0%,
+        #556B2F 50%,
+        #8B4513 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cabecalho h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    background: linear-gradient(
+        to right,
+        #6B8E23 0%,
+        #556B2F 50%,
+        #8B4513 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-icon {
+    font-size: 1.5rem;
+    color: #f4fcac;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.cabecalho:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.profile:hover {
+    transform: scale(1.05);
+}
+
+.dropdown-icon {
+    color: #6B8E23;
+}
+
+/* Mantenha os estilos existentes do dropdown */
+
+
+/* ... outros estilos do dropdown ... */
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+    
+}
+
+@keyframes spin {
+    from { --angle: 0deg; }
+    to { --angle: 360deg; }
+    
+}
+
+/* Dropdown */
+.dropdown__wrapper {
+    width: 500px; 
+    height: 400px;
+    top: 7rem; 
+    right: 20px;
+    position: absolute;
+    border-radius: 12px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    background: 
+        #8b451352 100%
+    ;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+    animation: fadeOutAnimation ease-in-out 0.3s forwards;
+    transition: all 0.3s ease; 
+    border-bottom: 1px solid #ffffff44;
+    padding-bottom: 0.625rem;
+}
+
+.dropdown__wrapper--fade-in {
+    animation: fadeInAnimation ease-in-out 0.3s forwards;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+    animation: fadeOutAnimation ease-in-out 0.3s forwards;
+}
+
+.none {
+    display: none;
+}
+
+.email {
+    color: black;
+    font-size: 1.3rem;
+    word-break: break-all;
+    padding: 4px 0;
+}
+
+/* Habilidades */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.skill-name {
+    font-family: 'Granny';
+    font-size: 1rem;
+    color: #f4fcac;
+    padding: 8px 15px;
+    background: linear-gradient(
+        to right,
+        rgb(107, 142, 35),
+        rgb(139, 69, 19)
+    );
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: inline-block; /* Mudança importante - agora visível por padrão */
+    position: static; /* Remove o posicionamento absoluto */
+    transform: none; /* Remove a transformação */
+    margin: 0; /* Remove margens extras */
+}
+
+.skill-name:hover {
+    background: linear-gradient(
+        to right,
+        rgba(107, 142, 35, 0.6),
+        rgba(139, 69, 19, 0.6)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.knowledge {
+    font-size: 1.5rem;
+    color: #f4fcac;
+    margin: 10px 0;
+    text-align: center;
+    display: block;
+    background: linear-gradient(
+        to right,
+        #6B8E23,
+        #8B4513
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #131a2c;
+}
+
+/* Remove os estilos antigos que não serão mais usados */
+.skill-item, 
+.skill-item:hover, 
+.skill-item img {
+    all: unset; /* Reseta completamente esses seletores */
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutAnimation {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4rem;
+    background-color: rgba(255, 235, 205, 0.164);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px black;
+    
+}
+
+.contateme {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(
+        to right,
+        #6B8E23 0%,
+        #556B2F 50%,
+        #8B4513 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none; /* Remove sombras que causam blur */
+}
+
+.wrapper {
+    display:flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    list-style: none;
+    height: 8rem;
+    margin-top: 50px;
+    
+}
+
+.wrapper .icon {
+    position: relative;
+    border-radius: 50%;
+    width: 3.125rem;
+    height: 3.125rem;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: 0 10px 10px black;
+    transition: all 0.2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Ajuste das imagens dentro dos containers */
+.wrapper .icon img {
+    width: 60%;              /* ocupa 60% do container */
+    height: 60%;             /* mantém proporção */
+    object-fit: contain;     /* não deforma */
+    display: block;          /* remove espaços extras */
+    pointer-events: none;    /* evita conflito com o link */
+}
+
+
+.wrapper .icon a {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 0.875rem;
+    background: rgb(0, 0, 0);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover a .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background-color:#8B4513 ;
+}
+
+.linkedin, .github1 {
+    background-color:#6B8E23;
+    size: 20px;
+}
+
+.wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ebdf77;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+    text-shadow: black;
+}
+
+
+/* Animações */
+@keyframes glow {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 200% 50%; }
+    75% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+/* === Media Queries para telas menores === */
+@media (max-width: 1200px) {
+    .button-glow {
+        left: 50%;
+        top: 15px;
+        transform: translateX(-50%);
+        width: 25rem;
+        font-size: 2.5rem;
+    }
+
+    .projeto-detalhes {
+        width: 80%;
+    }
+
+    .projeto-detalhes img {
+        width: 100%;
+        height: auto;
+        margin-top: 0;
+    }
+
+    .projeto-botao {
+        font-size: 1.3rem;
+        margin-top: 10px;
+    }
+
+    .cabecalho {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
+
+@media (max-width: 900px) {
+    .projetos-container {
+        flex-direction: column; /* empilha verticalmente */
+        align-items: center;
+        gap: 15px;
+        flex-wrap: nowrap; /* impede que se intercalem */
+        margin-top: 1rem;
+    }
+
+    .projeto {
+        width: 90%; /* ocupa quase toda a tela */
+        min-width: unset;
+    }
+
+    .projeto-detalhes {
+        width: 95%;
+        top: auto;
+        position: relative;
+        transform: none;
+    }
+
+    .projeto-detalhes img {
+        width: 100%;
+        height: auto;
+    }
+
+    .projeto-botao {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Carla Machado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/galaxia.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        <img id="backgroundImage" src="pexels-jplenio-1776268.jpg" alt="Background Image" class="background-image">
+
+        <a href="#" class="button-glow" onclick="mostrarProjetos()">
+            <span class="text-container">Meus projetos</span>
+        </a>
+
+        <div id="projetos-container" class="projetos-container" style="display: none;">
+            <div class="projeto">
+                <span class="projeto-nome">The English Lands</span>
+                <div class="projeto-detalhes">
+                    <img src="englishlands.png" alt="The English Lands">
+                    <a href="https://carlamachadom.github.io/The-English-Lands/" class="projeto-botao">Acesse aqui</a>
+                </div>
+            </div>
+
+            <div class="projeto">
+                <span class="projeto-nome">Sistema Solar</span>
+                <div class="projeto-detalhes">
+                    <img src="ss.png" alt="Sistema Solar">
+                    <a href="https://carlamachadom.github.io/Sistema-Solar/" class="projeto-botao">Acesse aqui</a>
+                </div>
+            </div>
+
+            <div class="projeto">
+                <span class="projeto-nome">Clínica</span>
+                <div class="projeto-detalhes">
+                    <img src="pedepano.png" alt="Clínica Pé de Pano">
+                    <a href="https://senai-morvan-figueiredo.github.io/ClinicaPeDePano/index.html" class="projeto-botao">Acesse aqui</a>
+                </div>
+            </div>
+
+            <div class="projeto">
+                <span class="projeto-nome">Página Senai/Grupo Maculados</span>
+                <div class="projeto-detalhes">
+                    <img src="maculados.png" alt="Grupo Maculados">
+                    <a href="https://senai-morvan-figueiredo.github.io/demo_git_branches/index.html" class="projeto-botao">Acesse aqui</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Cabeçalho -->
+        <header class="cabecalho"> 
+            <div class="navigation__group">
+                <img class="profile" src="WhatsApp Image 2024-02-22 at 20.57.02.jpeg" alt="Carla Machado">
+                <div class="header-text">
+                    <h1>Carla Machado Miguel</h1>
+                    <h2>Desenvolvedora de sistemas</h2>
+                </div>
+                <i class="fas fa-angle-down dropdown-icon"></i>
+            </div>
+            
+            <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+                <div class="dropdown__group">
+                    <div class="email">carlamasm@gmail.com</div>
+                </div>
+                <hr class="divider">
+                <nav>
+                    <ul>
+                        <li class="profile-section">
+                            <span class="knowledge">Meus conhecimentos</span>
+                        </li>
+                        <li class="skills-list">
+                            <div class="skill-name">HTML</div>
+                            <div class="skill-name">CSS</div>
+                            <div class="skill-name">JavaScript</div>
+                            <div class="skill-name">Python</div>
+                            <div class="skill-name">Git/Github</div>
+                            <div class="skill-name">Figma</div>
+                            <div class="skill-name">SQL</div>
+                            <div class="skill-name">Inglês</div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Footer -->
+        <footer>
+            <a class="contateme">Veja mais, me contate ou me peça uma receita de pão de queijo mineiro em:</a>
+            <ul class="wrapper">
+                <li class="icon linkedin">
+                    <a href="https://www.linkedin.com/in/carlamachadom/" target="_blank">
+                        <span class="tooltip">LinkedIn</span>
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="icon github1">
+                    <a href="https://github.com/CarlaMachadoM" target="_blank">
+                        <span class="tooltip">Github</span>
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
