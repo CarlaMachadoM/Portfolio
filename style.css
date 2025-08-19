@@ -425,8 +425,7 @@ body, html {
     padding: 20px;
     overflow: hidden;
     
-    background: 
-        #8b451352 100%
+    background:#6a8e237c 100%
     ;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
     animation: fadeOutAnimation ease-in-out 0.3s forwards;
@@ -473,8 +472,9 @@ body, html {
     padding: 8px 15px;
     background: linear-gradient(
         to right,
-        rgb(107, 142, 35),
-        rgb(139, 69, 19)
+                #6a8e238f 0%,
+        #556b2f7e 50%,
+        #8b45136b 100%
     );
     border-radius: 20px;
     transition: all 0.3s ease;
@@ -482,6 +482,7 @@ body, html {
     position: static; /* Remove o posicionamento absoluto */
     transform: none; /* Remove a transformação */
     margin: 0; /* Remove margens extras */
+    color: #131a2c;
 }
 
 .skill-name:hover {
